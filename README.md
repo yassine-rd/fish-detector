@@ -46,6 +46,180 @@ In this work, we propose to create a custom YOLOv4 object detector to track and 
 [Release v1.0](https://github.com/yassine-rd/fish-detector/releases/tag/v1.0)  
 Initial release date - 27/11/2022
 
+## 🐟 How to apply
+
+### Getting sarted
+
+Instructions given in this repository are meant to be used in a machine equiped with a macOS operating system (in our case we used [macOS Venture 13.0.1](https://www.apple.com/fr/macos/ventura/)). Readers should be aware that deep Learning is very computationally intensive and therefore should have access to a computer with the minimum requirements for their project. You can consult [this](https://timdettmers.com/2018/12/16/deep-learning-hardware-guide/) guide in order to understand the requirements for using deep learning.
+
+Scripts used in this repository are of advanced python code, if completely unfamiliarised with python
+a useful familiarization with python basic knowledge, can be of great use
+(more specifically: [syntax]( https://www.w3schools.com/python/python_syntax.asp),
+[for loops]( https://www.w3schools.com/python/python_for_loops.asp) and
+[functions]( https://www.w3schools.com/python/python_functions.asp)).
+
+### Conda
+
+I recommend building the tracker in an conda environment.
+
+```bash
+# Tensorflow CPU
+conda env create -f conda-cpu.yml
+conda activate yolov4-cpu
+
+# Tensorflow GPU
+conda env create -f conda-gpu.yml
+conda activate yolov4-gpu
+```
+
+### Weights
+
+#### Downloading project weights
+
+This project's YOLOv4 weights have been already trained and can be downloaded [here](https://drive.google.com/file/d/17yiD7xVCRPZotjC0yaFAiP5wz6Umd2HW/view?usp=sharing).
+
+After downloading the `yolov4_93map.weights` file, copy and paste it from your downloads folder into the 'data' folder of this repository.
+
+#### Using custom trained YOLOv4 weights
+
+> TODO
+
+### Running the experiment
+
+```python
+# Converting darknet weights to tensorflow
+python save_model.py --weights ./data/yolov4_93map.weights --output ./checkpoints/yolov4-416 --input_size 416 --model yolov4
+
+# Detection on images
+python detect.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --images ./data/images/<YOUR_IMAGE>
+
+# Tracking on videos
+python detect_video.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --video ./data/video/<YOUR_VIDEO> --output ./detections/results.avi
+
+# Tracking on webcam
+python detect_video.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --video 0 --output ./detections/webcam.avi
+```
+
+**Note:** You can also run the detector on multiple images at once by changing the `--images` flag like such `--images "./data/images/<IMAGE_1>, ./data/images/<IMAGE_2>"`
+
+#### Result image(s)
+
+You can find the outputted image(s) showing the detections saved within the 'detections' folder.
+
+<div style="text-align: center;">
+    <img src="assets/detection1.png" alt="Paracheirodon innesi detection" width="700"/>
+</div>
+
+#### Result video
+
+Video saves wherever you point --output flag to. If you don't set the flag then your video will not be saved with detections on it.
+
+<div style="text-align: center;">
+    <img src="assets/cardinalis-tracker.gif" alt="Paracheirodon axelrodi tracking" width="700"/>
+</div>
+
+### Custom YOLOv4 model
+
+The following commands will allow you to run your custom yolov4 model.
+
+```python
+# Converting darknet weights to tensorflow
+python save_model.py --weights ./data/<CUSTOM_WEIGHTS_FILE> --output ./checkpoints/custom-416 --input_size 416 --model yolov4 
+
+# Detection on images
+python detect.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --video ./data/video/<YOUR_VIDEO> --output ./detections/results.avi
+
+# Tracking on videos
+python detect_video.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --video ./data/video/<YOUR_VIDEO> --output ./detections/results.avi
+
+# Tracking on webcam
+python detect_video.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --video 0 --output ./detections/webcam.avi
+```
+
+### Custom functions and flags
+
+Here is how to use all the currently supported custom functions and flags.
+
+#### Counting objects
+
+Custom count functions are within the file [core/functions.py](https://github.com/yassine-rd/fish-detector/blob/master/core/functions.py). It can be used to count total objects found or can count number of objects detected per class.
+
+##### Count total bbjects
+
+To count total objects all that is needed is to add the custom flag `--count` to your `detect.py` or `detect_video.py` command.
+
+```python
+# Running the model while counting total objects detected
+python detect.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --images ./data/images/<YOUR_IMAGE> --count
+```
+
+<div style="text-align: center;">
+    <img src="assets/cardinalis-count.png" alt="Paracheirodon axelrodi tracking" width="700"/>
+</div>
+
+##### Count total objects per class
+
+To count the number of objects for each individual class of your object detector you need to add the custom flag `--count` as well as change one line in the `detect.py` or `detect_video.py` script. By default the count_objects function has a parameter called `by_class` that is set to `False`. If you change this parameter to `True` it will count per class instead.
+
+To count per class, make `detect.py` or `detect_video.py` look like this:
+
+![COUNT flag](assets/count-flag.png)
+
+Then run the same command as above:
+
+```python
+# Running the model while counting objects per class
+python detect.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --images ./data/images/<YOUR_IMAGE> --count
+```
+
+<div style="text-align: center;">
+    <img src="assets/two-fish-species.png" alt="Paracheirodon axelrodi tracking" width="700"/>
+</div>
+
+**Note:** You can add the `--count` flag to detect_video.py commands as well!
+
+#### Printing detailed infos
+
+Custom flag called ***info*** can be added to any `detect.py` or `detect_video.py` commands in order to print detailed information about each detection made by the object detector.
+
+To print the detailed information to your command prompt, just add the flag `--info` to any of your commands. The information on each detection includes the class, confidence in the detection and the bounding box coordinates of the detection in xmin, ymin, xmax, ymax format.
+
+If you want to edit what information gets printed you can edit the draw_bbox function found within the [core/utils.py](https://github.com/yassine-rd/fish-detector/blob/master/core/utils.py) file. The line that prints the information looks as follows:
+
+![INFO flag](assets/info-flag.png)
+
+Example of info flag added to command:
+
+```python
+# Running the model while printing informations into your command prompt
+python detect.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --images ./data/images/<YOUR_IMAGE> --info
+```
+
+Resulting output within your shell or terminal:
+
+![INFO flag](assets/infos.png)
+
+**Note:** You can add the --info flag to detect_video.py commands as well!
+
+#### Crop detections
+
+Custom crop function within the file [core/functions.py](https://github.com/yassine-rd/fish-detector/blob/master/core/functions.py) can be applied to any `detect.py` or `detect_video.py` commands in order to crop the YOLOv4 detections and save them each as their own new image.
+
+To crop detections all you need to do is add the `--crop` flag to any command. The resulting cropped images will be saved within the `detections/crop/` folder.
+
+Example of crop flag added to command:
+
+```python
+# Running the model while printing informations into your command prompt
+python detect.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --images ./data/images/<YOUR_IMAGE> --crop
+```
+
+Here is an example of one of the resulting cropped detections from the above command:
+
+<div style="text-align: center;">
+    <img src="assets/crop-cardinalis.png" alt="Paracheirodon axelrodi tracking" width="400"/>
+</div>
+
 ## 💬 Contact
 
 Reach out to [@yassine_rd_](https://twitter.com/yassine_rd_) on Twitter or feel free to contact yassine.rodani@gmail.com
@@ -63,6 +237,7 @@ See the [LICENSE](https://github.com/yassine-rd/fish-detector/blob/master/LICENS
 - [The AI Guy](https://github.com/theAIGuysCode)
 - [AlexeyAB Darknet Repo](https://github.com/AlexeyAB/darknet)
 - [YOLOv4 Paper](https://arxiv.org/abs/2004.10934v1)
+- [hunglc007](https://github.com/hunglc007?tab=repositories)
 
 ## 📜 Cite
 
