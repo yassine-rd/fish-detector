@@ -232,7 +232,7 @@ save_model.py:
     (default: 'False')
   --input_size: define input size of export model
     (default: 416)
-  --framework: what framework to use (tf, trt, tflite)
+  --framework: what framework to use (tf, tflite)
     (default: tf)
   --model: yolov3 or yolov4
     (default: yolov4)
@@ -246,7 +246,7 @@ detect.py:
     (default: 'False')
   --weights: path to weights file
     (default: './checkpoints/yolov4-416')
-  --framework: what framework to use (tf, trt, tflite)
+  --framework: what framework to use (tf, tflite)
     (default: tf)
   --model: yolov3 or yolov4
     (default: yolov4)
@@ -276,7 +276,7 @@ detect_video.py:
     (default: 'false')
   --weights: path to weights file
     (default: './checkpoints/yolov4-416')
-  --framework: what framework to use (tf, trt, tflite)
+  --framework: what framework to use (tf, tflite)
     (default: tf)
   --model: yolov3 or yolov4
     (default: yolov4)
