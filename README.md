@@ -225,7 +225,7 @@ Here is an example of one of the resulting cropped detections from the above com
 ```bash
 save_model.py:
   --weights: path to weights file
-    (default: './data/yolov4.weights')
+    (default: './data/yolov4_93map.weights')
   --output: path to output
     (default: './checkpoints/yolov4-416')
   --[no]tiny: yolov4 or yolov4-tiny
@@ -239,7 +239,7 @@ save_model.py:
 
 detect.py:
   --images: path to input images as a string with images separated by ","
-    (default: './data/images/kite.jpg')
+    (default: './data/images/cardinalis.jpeg')
   --output: path to output folder
     (default: './detections/')
   --[no]tiny: yolov4 or yolov4-tiny
@@ -267,7 +267,7 @@ detect.py:
     
 detect_video.py:
   --video: path to input video (use 0 for webcam)
-    (default: './data/video/video.mp4')
+    (default: './data/video/cardinalis.mp4')
   --output: path to output video (remember to set right codec for given format. e.g. XVID for .avi)
     (default: None)
   --output_format: codec used in VideoWriter when saving video to file
