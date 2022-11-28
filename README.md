@@ -7,7 +7,13 @@
 ![GitHub](https://img.shields.io/github/license/yassine-rd/fish-detector?color=yellow)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/yassine-rd/fish-detector?color=brightgreen&label=commits)
 
+This repository implements YOLOv4 using the Darknet framework for tracking and counting of 2 different fish species in an aquarium.
+
 ## ✨ Abstract
+
+YOLO (You only look once) uses CNN to detect objects in real time. A single convolutional network simultaneously predicts multiple bounding boxes and class probabilities for those boxes. YOLO trains on full images and directly optimizes detection performance.
+
+![Project illustration](https://raw.githubusercontent.com/yassine-rd/fish-detector/master/assets/github-illustration.png)
 
 Three species of fish that are common in aquariums belong to the genus Paracheirodon, which is a member of the family Characidae. It is native to the tropical regions of South America.
 
@@ -19,7 +25,7 @@ The following three members of the genus Paracheirodon are readily found in mark
 - Paracheirodon axelrodi
 - Paracheirodon simulans
 
-![members of the genus Paracheirodon](https://raw.githubusercontent.com/yassine-rd/fish-detector/main/fish-species.png)
+![Members of the genus Paracheirodon](https://raw.githubusercontent.com/yassine-rd/fish-detector/master/assets/fish-species.png)
 
 ## 🎯 Project Aim
 
