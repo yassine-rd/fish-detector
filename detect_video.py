@@ -23,12 +23,12 @@ physical_devices = tf.config.experimental.list_physical_devices('GPU')
 if len(physical_devices) > 0:
     tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
-flags.DEFINE_string('framework', 'tf', '(tf, tflite, trt')
+flags.DEFINE_string('framework', 'tf', '(tf, tflite')
 flags.DEFINE_string('weights', './checkpoints/yolov4-416', 'path to weights file')
 flags.DEFINE_integer('size', 416, 'resize images to')
 flags.DEFINE_boolean('tiny', False, 'yolo or yolo-tiny')
 flags.DEFINE_string('model', 'yolov4', 'yolov3 or yolov4')
-flags.DEFINE_string('video', './data/video/video.mp4', 'path to input video or set to 0 for webcam')
+flags.DEFINE_string('video', './data/video/cardinalis.mp4', 'path to input video or set to 0 for webcam')
 flags.DEFINE_string('output', None, 'path to output video')
 flags.DEFINE_string('output_format', 'XVID', 'codec used in VideoWriter when saving video to file')
 flags.DEFINE_float('iou', 0.45, 'iou threshold')
@@ -131,8 +131,8 @@ def main(_argv):
         # by default allow all classes in .names file
         allowed_classes = list(class_names.values())
         
-        # custom allowed classes (uncomment line below to allow detections for only people)
-        #allowed_classes = ['person']
+        # custom allowed classes (uncomment line below to allow detections for only cardinalis species)
+        #allowed_classes = ['cardinalis']
 
         # if crop flag is enabled, crop each detection and save it as new image
         if FLAGS.crop:
