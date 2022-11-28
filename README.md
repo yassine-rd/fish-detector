@@ -127,7 +127,7 @@ The following commands will allow you to run your custom yolov4 model.
 python save_model.py --weights ./data/<CUSTOM_WEIGHTS_FILE> --output ./checkpoints/custom-416 --input_size 416 --model yolov4 
 
 # Detection on images
-python detect.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --video ./data/video/<YOUR_VIDEO> --output ./detections/results.avi
+python detect.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --images ./data/images/<YOUR_IMAGE>
 
 # Tracking on videos
 python detect_video.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --video ./data/video/<YOUR_VIDEO> --output ./detections/results.avi
@@ -154,7 +154,7 @@ python detect.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --
 ```
 
 <div style="text-align: center;">
-    <img src="assets/cardinalis-count.png" alt="Paracheirodon axelrodi tracking" width="700"/>
+    <img src="assets/cardinalis-count.png" alt="Paracheirodon axelrodi detection and count" width="700"/>
 </div>
 
 ##### Count total objects per class
@@ -173,7 +173,7 @@ python detect.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --
 ```
 
 <div style="text-align: center;">
-    <img src="assets/two-fish-species.png" alt="Paracheirodon axelrodi tracking" width="700"/>
+    <img src="assets/two-fish-species.png" alt="Two fish species detection and count" width="700"/>
 </div>
 
 **Note:** You can add the `--count` flag to detect_video.py commands as well!
@@ -217,7 +217,7 @@ python detect.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --
 Here is an example of one of the resulting cropped detections from the above command:
 
 <div style="text-align: center;">
-    <img src="assets/crop-cardinalis.png" alt="Paracheirodon axelrodi tracking" width="400"/>
+    <img src="assets/crop-cardinalis.png" alt="Paracheirodon axelrodi cropped image" width="400"/>
 </div>
 
 ## 💬 Contact
