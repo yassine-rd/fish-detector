@@ -15,7 +15,7 @@ YOLO (You only look once) uses CNN to detect objects in real time. A single conv
 
 ![Project illustration](https://raw.githubusercontent.com/yassine-rd/fish-detector/master/assets/github-illustration.png)
 
-Three species of fish that are common in aquariums belong to the genus Paracheirodon, which is a member of the family Characidae. It is native to the tropical regions of South America.
+Three fish species that are common in aquariums belong to the genus Paracheirodon, which is a member of the family Characidae. It is native to the tropical regions of South America.
 
 The Paracheirodon species range in size from 3 to 5 cm, are social, uninterested in other inhabitants, and living in groups of around ten individuals.
 
@@ -46,11 +46,17 @@ In this work, we propose to create a custom YOLOv4 object detector to track and 
 [Release v1.0](https://github.com/yassine-rd/fish-detector/releases/tag/v1.0)  
 Initial release date - 27/11/2022
 
+## 🤖 Model training
+
+The training part of this project has been done separately using Jupyter notebook.
+
+> TODO: jupyter notebook for model training
+
 ## 🐟 How to apply
 
 ### Getting sarted
 
-Instructions given in this repository are meant to be used in a machine equiped with a macOS operating system (in our case we used [macOS Venture 13.0.1](https://www.apple.com/fr/macos/ventura/)). Readers should be aware that deep Learning is very computationally intensive and therefore should have access to a computer with the minimum requirements for their project. You can consult [this](https://timdettmers.com/2018/12/16/deep-learning-hardware-guide/) guide in order to understand the requirements for using deep learning.
+Instructions given in this repository are meant to be used in a machine equiped with a macOS operating system (in our case we used [macOS Venture 13.0.1](https://www.apple.com/fr/macos/ventura/)). Readers should be aware that Deep Learning is very computationally intensive and therefore should have access to a computer with the minimum requirements for their project. You can consult [this](https://timdettmers.com/2018/12/16/deep-learning-hardware-guide/) guide in order to understand the requirements for using deep learning.
 
 Scripts used in this repository are of advanced python code, if completely unfamiliarised with python
 a useful familiarization with python basic knowledge, can be of great use
@@ -74,15 +80,9 @@ conda activate yolov4-gpu
 
 ### Weights
 
-#### Downloading project weights
-
 This project's YOLOv4 weights have been already trained and can be downloaded [here](https://drive.google.com/file/d/17yiD7xVCRPZotjC0yaFAiP5wz6Umd2HW/view?usp=sharing).
 
 After downloading the `yolov4_93map.weights` file, copy and paste it from your downloads folder into the 'data' folder of this repository.
-
-#### Using custom trained YOLOv4 weights
-
-> TODO
 
 ### Running the experiment
 
@@ -100,7 +100,7 @@ python detect_video.py --weights ./checkpoints/yolov4-416 --size 416 --model yol
 python detect_video.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --video 0 --output ./detections/webcam.avi
 ```
 
-**Note:** You can also run the detector on multiple images at once by changing the `--images` flag like such `--images "./data/images/<IMAGE_1>, ./data/images/<IMAGE_2>"`
+> TODO: Running the detector on multiple images at once by changing the `--images` flag like such `--images "./data/images/<IMAGE_1>, ./data/images/<IMAGE_2>"`
 
 #### Result image(s)
 
@@ -219,6 +219,82 @@ Here is an example of one of the resulting cropped detections from the above com
 <p style="text-align: center;">
     <img src="assets/crop-cardinalis.png" alt="Paracheirodon axelrodi cropped image" width="400"/>
 </p>
+
+## 📝 CLI args reference
+
+```bash
+save_model.py:
+  --weights: path to weights file
+    (default: './data/yolov4.weights')
+  --output: path to output
+    (default: './checkpoints/yolov4-416')
+  --[no]tiny: yolov4 or yolov4-tiny
+    (default: 'False')
+  --input_size: define input size of export model
+    (default: 416)
+  --framework: what framework to use (tf, trt, tflite)
+    (default: tf)
+  --model: yolov3 or yolov4
+    (default: yolov4)
+
+detect.py:
+  --images: path to input images as a string with images separated by ","
+    (default: './data/images/kite.jpg')
+  --output: path to output folder
+    (default: './detections/')
+  --[no]tiny: yolov4 or yolov4-tiny
+    (default: 'False')
+  --weights: path to weights file
+    (default: './checkpoints/yolov4-416')
+  --framework: what framework to use (tf, trt, tflite)
+    (default: tf)
+  --model: yolov3 or yolov4
+    (default: yolov4)
+  --size: resize images to
+    (default: 416)
+  --iou: iou threshold
+    (default: 0.45)
+  --score: confidence threshold
+    (default: 0.25)
+  --count: count objects within images
+    (default: False)
+  --dont_show: dont show image output
+    (default: False)
+  --info: print info on detections
+    (default: False)
+  --crop: crop detections and save as new images
+    (default: False)
+    
+detect_video.py:
+  --video: path to input video (use 0 for webcam)
+    (default: './data/video/video.mp4')
+  --output: path to output video (remember to set right codec for given format. e.g. XVID for .avi)
+    (default: None)
+  --output_format: codec used in VideoWriter when saving video to file
+    (default: 'XVID')
+  --[no]tiny: yolov4 or yolov4-tiny
+    (default: 'false')
+  --weights: path to weights file
+    (default: './checkpoints/yolov4-416')
+  --framework: what framework to use (tf, trt, tflite)
+    (default: tf)
+  --model: yolov3 or yolov4
+    (default: yolov4)
+  --size: resize images to
+    (default: 416)
+  --iou: iou threshold
+    (default: 0.45)
+  --score: confidence threshold
+    (default: 0.25)
+  --count: count objects within video
+    (default: False)
+  --dont_show: dont show video output
+    (default: False)
+  --info: print info on detections
+    (default: False)
+  --crop: crop detections and save as new images
+    (default: False)
+```
 
 ## 💬 Contact
 
