@@ -158,9 +158,7 @@ def YOLOv3_tiny(input_layer, NUM_CLASS):
     return [conv_mbbox, conv_lbbox]
 
 def decode(conv_output, output_size, NUM_CLASS, STRIDES, ANCHORS, i, XYSCALE=[1,1,1], FRAMEWORK='tf'):
-    if FRAMEWORK == 'trt':
-        return decode_trt(conv_output, output_size, NUM_CLASS, STRIDES, ANCHORS, i=i, XYSCALE=XYSCALE)
-    elif FRAMEWORK == 'tflite':
+    if FRAMEWORK == 'tflite':
         return decode_tflite(conv_output, output_size, NUM_CLASS, STRIDES, ANCHORS, i=i, XYSCALE=XYSCALE)
     else:
         return decode_tf(conv_output, output_size, NUM_CLASS, STRIDES, ANCHORS, i=i, XYSCALE=XYSCALE)
@@ -250,41 +248,6 @@ def decode_tflite(conv_output, output_size, NUM_CLASS, STRIDES, ANCHORS, i=0, XY
     pred_xywh = tf.concat([pred_xy, pred_wh], axis=-1)
     return pred_xywh, pred_prob
     # return tf.concat([pred_xywh, pred_conf, pred_prob], axis=-1)
-
-def decode_trt(conv_output, output_size, NUM_CLASS, STRIDES, ANCHORS, i=0, XYSCALE=[1,1,1]):
-    batch_size = tf.shape(conv_output)[0]
-    conv_output = tf.reshape(conv_output, (batch_size, output_size, output_size, 3, 5 + NUM_CLASS))
-
-    conv_raw_dxdy, conv_raw_dwdh, conv_raw_conf, conv_raw_prob = tf.split(conv_output, (2, 2, 1, NUM_CLASS), axis=-1)
-
-    xy_grid = tf.meshgrid(tf.range(output_size), tf.range(output_size))
-    xy_grid = tf.expand_dims(tf.stack(xy_grid, axis=-1), axis=2)  # [gx, gy, 1, 2]
-    xy_grid = tf.tile(tf.expand_dims(xy_grid, axis=0), [batch_size, 1, 1, 3, 1])
-
-    # x = tf.tile(tf.expand_dims(tf.range(output_size, dtype=tf.float32), axis=0), [output_size, 1])
-    # y = tf.tile(tf.expand_dims(tf.range(output_size, dtype=tf.float32), axis=1), [1, output_size])
-    # xy_grid = tf.expand_dims(tf.stack([x, y], axis=-1), axis=2)  # [gx, gy, 1, 2]
-    # xy_grid = tf.tile(tf.expand_dims(xy_grid, axis=0), [tf.shape(conv_output)[0], 1, 1, 3, 1])
-
-    xy_grid = tf.cast(xy_grid, tf.float32)
-
-    # pred_xy = ((tf.sigmoid(conv_raw_dxdy) * XYSCALE[i]) - 0.5 * (XYSCALE[i] - 1) + xy_grid) * \
-    #           STRIDES[i]
-    pred_xy = (tf.reshape(tf.sigmoid(conv_raw_dxdy), (-1, 2)) * XYSCALE[i] - 0.5 * (XYSCALE[i] - 1) + tf.reshape(xy_grid, (-1, 2))) * STRIDES[i]
-    pred_xy = tf.reshape(pred_xy, (batch_size, output_size, output_size, 3, 2))
-    pred_wh = (tf.exp(conv_raw_dwdh) * ANCHORS[i])
-    pred_xywh = tf.concat([pred_xy, pred_wh], axis=-1)
-
-    pred_conf = tf.sigmoid(conv_raw_conf)
-    pred_prob = tf.sigmoid(conv_raw_prob)
-
-    pred_prob = pred_conf * pred_prob
-
-    pred_prob = tf.reshape(pred_prob, (batch_size, -1, NUM_CLASS))
-    pred_xywh = tf.reshape(pred_xywh, (batch_size, -1, 4))
-    return pred_xywh, pred_prob
-    # return tf.concat([pred_xywh, pred_conf, pred_prob], axis=-1)
-
 
 def filter_boxes(box_xywh, scores, score_threshold=0.4, input_shape = tf.constant([416,416])):
     scores_max = tf.math.reduce_max(scores, axis=-1)
