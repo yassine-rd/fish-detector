@@ -110,8 +110,8 @@ def main(_argv):
         # by default allow all classes in .names file
         allowed_classes = list(class_names.values())
         
-        # custom allowed classes (uncomment line below to allow detections for only people)
-        #allowed_classes = ['person']
+        # custom allowed classes (uncomment line below to allow detections for only cardinalis species)
+        #allowed_classes = ['cardinalis']
 
         # if crop flag is enabled, crop each detection and save it as new image
         if FLAGS.crop:
