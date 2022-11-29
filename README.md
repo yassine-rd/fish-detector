@@ -68,6 +68,8 @@ a useful familiarization with python basic knowledge, can be of great use
 
 I recommend building the tracker in an conda environment.
 
+You can find [here](https://github.com/yassine-rd/knowledge-base/blob/master/conda/conda.md) a quick introduction to conda and how to set up [Miniforge](https://github.com/conda-forge/miniforge) which is a minimal installer for conda specific to [conda-forge](https://conda-forge.org/).
+
 ```bash
 # Tensorflow CPU
 conda env create -f conda-cpu.yml
