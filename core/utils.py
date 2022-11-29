@@ -177,7 +177,7 @@ def draw_bbox(image, bboxes, info = False, counted_classes = None, show_label=Tr
                 height_ratio = int(image_h / 25)
                 offset = 15
                 for key, value in counted_classes.items():
-                    cv2.putText(image, "{}s detected: {}".format(key, value), (5, offset),
+                    cv2.putText(image, "{} detected: {}".format(key, value), (5, offset),
                             cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 255, 0), 2)
                     offset += height_ratio
     return image
