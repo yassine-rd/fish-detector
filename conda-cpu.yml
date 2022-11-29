@@ -1,0 +1,16 @@
+name: yolov4-cpu
+channels:
+  - conda-forge
+dependencies:
+    - python=3.8
+    - pip
+    - tensorflow
+    - matplotlib
+    - pip:
+        - opencv-contrib-python
+        - lxml
+        - tqdm
+        - absl-py
+        - easydict
+        - pillow
+        - pytesseract
