@@ -182,8 +182,12 @@ poetry.toml
 *.DS_Store
 
 ### Project folders and files
-# checkpoints folder
-/checkpoints/yolov4-custom
+## checkpoints folder
+# ignore
+/checkpoints/*
+
+# allow
+!/checkpoints/.gitkeep
 
 ## data folder
 # ignore
