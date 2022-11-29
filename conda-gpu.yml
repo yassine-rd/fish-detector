@@ -1,0 +1,19 @@
+name: yolov4-gpu
+channels:
+  - apple
+  - conda-forge
+dependencies:
+    - python=3.8
+    - pip
+    - tensorflow-deps
+    - matplotlib
+    - pip:
+        - tensorflow-macos
+        - tensorflow-metal
+        - opencv-contrib-python
+        - lxml
+        - tqdm
+        - absl-py
+        - easydict
+        - pillow
+        - pytesseract
