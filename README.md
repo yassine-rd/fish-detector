@@ -56,7 +56,7 @@ The training part of this project has been done separately using Jupyter noteboo
 
 ### Getting sarted
 
-Instructions given in this repository are meant to be used in a machine equiped with a macOS operating system (in our case we used [macOS Venture 13.0.1](https://www.apple.com/fr/macos/ventura/)). Readers should be aware that Deep Learning is very computationally intensive and therefore should have access to a computer with the minimum requirements for their project. You can consult [this](https://timdettmers.com/2018/12/16/deep-learning-hardware-guide/) guide in order to understand the requirements for using deep learning.
+Instructions given in this repository are meant to be used in a machine equiped with a macOS operating system (in our case we used [macOS Venture 13.0.1](https://www.apple.com/fr/macos/ventura/)) and with a M1 chip. Readers should be aware that Deep Learning is very computationally intensive and therefore should have access to a computer with the minimum requirements for their project. You can consult [this](https://timdettmers.com/2018/12/16/deep-learning-hardware-guide/) guide in order to understand the requirements for using deep learning.
 
 Scripts used in this repository are of advanced python code, if completely unfamiliarised with python
 a useful familiarization with python basic knowledge, can be of great use
