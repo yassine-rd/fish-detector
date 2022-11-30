@@ -194,6 +194,7 @@ poetry.toml
 /data/images/*
 /data/video/*
 /data/yolov4_93map.weights
+/data/yolov4-tiny_93map.weights
 
 # allow
 !/data/images/.gitkeep
