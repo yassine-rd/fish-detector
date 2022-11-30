@@ -19,8 +19,8 @@ import cv2
 from PIL import Image
 
 from tensorflow.python.saved_model import tag_constants
-from tensorflow.compat.v1 import ConfigProto
-from tensorflow.compat.v1 import InteractiveSession
+from tensorflow._api.v2.compat.v1 import ConfigProto
+from tensorflow._api.v2.compat.v1 import InteractiveSession
 
 
 flags.DEFINE_string('framework', 'tf', '(tf, tflite')
