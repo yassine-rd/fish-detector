@@ -138,6 +138,34 @@ python detect_video.py --weights ./checkpoints/custom-416 --size 416 --model yol
 python detect_video.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --video 0 --output ./detections/webcam.avi
 ```
 
+### Using YOLOv4-tiny model
+
+YOLOv4-tiny is the compressed version of YOLOv4 designed to train on machines that have less computing power. Its model weights are around 20 megabytes large.
+
+<p style="text-align: center;">
+    <img src="https://blog.roboflow.com/content/images/2020/06/image-84.png" alt="YOLOv4 Results" width="700"/>
+</p>
+
+This project's YOLOv4-tiny weights have been already trained and can be downloaded [here](https://drive.google.com/file/d/175rwTsZLAkaqbiJoY00vK0m5AHqzuvFh/view?usp=sharing).
+
+After downloading the `yolov4-tiny_93map.weights` file, copy and paste it from your downloads folder into the 'data' folder of this repository.
+
+The following commands will allow you to run YOLOv4-tiny for this project.
+
+```python
+# Converting darknet weights to tensorflow using tiny FLAG
+python save_model.py --weights ./data/yolov4-tiny_93map.weights --output ./checkpoints/yolov4-tiny-416 --input_size 416 --model yolov4 --tiny
+
+# Detection on images using YOLOv4 tiny
+python detect.py --weights ./checkpoints/yolov4-tiny-416 --size 416 --model yolov4 --images ./data/images/<YOUR_IMAGE> --tiny
+
+# Tracking on videos using YOLOv4 tiny
+python detect_video.py --weights ./checkpoints/yolov4-tiny-416 --size 416 --model yolov4 --video ./data/video/<YOUR_VIDEO> --output ./detections/results.avi --tiny
+
+# Tracking on webcam using YOLOv4 tiny
+python detect_video.py --weights ./checkpoints/yolov4-tiny-416 --size 416 --model yolov4 --video 0 --output ./detections/webcam.avi --tiny
+```
+
 ### Custom functions and flags
 
 Here is how to use all the currently supported custom functions and flags.
@@ -224,7 +252,7 @@ Here is an example of one of the resulting cropped detections from the above com
 
 ## 📝 CLI args reference
 
-```bash
+```python
 save_model.py:
   --weights: path to weights file
     (default: './data/yolov4_93map.weights')
