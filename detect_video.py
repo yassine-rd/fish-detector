@@ -158,7 +158,7 @@ def main(_argv):
             counted_classes = count_objects(pred_bbox, by_class = False, allowed_classes=allowed_classes)
             # loop through dict and print
             for key, value in counted_classes.items():
-                print("Number of {}s: {}".format(key, value))
+                print("{}s: {}".format(key, value))
             image = utils.draw_bbox(frame, pred_bbox, FLAGS.info, counted_classes, allowed_classes=allowed_classes)
         else:
             image = utils.draw_bbox(frame, pred_bbox, FLAGS.info, allowed_classes=allowed_classes)
