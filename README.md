@@ -44,7 +44,7 @@ In this work, we propose to create a custom YOLOv4 object detector to track and 
 ## 🎬 Releases
 
 [Release v1.0](https://github.com/yassine-rd/fish-detector/releases/tag/v1.0)  
-Initial release date - 27/11/2022
+Initial release date - 01/12/2022
 
 ## 🤖 Model training
 
