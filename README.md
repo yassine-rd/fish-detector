@@ -341,17 +341,6 @@ See the [LICENSE](https://github.com/yassine-rd/fish-detector/blob/master/LICENS
 ## 🌐 References
 
 - [The AI Guy](https://github.com/theAIGuysCode)
-- [AlexeyAB Darknet Repo](https://github.com/AlexeyAB/darknet)
+- [AlexeyAB](https://github.com/AlexeyAB/darknet)
 - [YOLOv4 Paper](https://arxiv.org/abs/2004.10934v1)
 - [hunglc007](https://github.com/hunglc007?tab=repositories)
-
-## 📜 Cite
-
-```markdown
-@misc{darknet13,
-  author =   {Joseph Redmon},
-  title =    {Darknet: Open Source Neural Networks in C},
-  howpublished = {\url{http://pjreddie.com/darknet/}},
-  year = {2013--2016}
-}
-```
