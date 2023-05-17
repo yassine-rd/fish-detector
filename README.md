@@ -1,13 +1,6 @@
 # Fish detection, tracking and counting using YOLOv4 and Darknet
 
-![GitHub repo size](https://img.shields.io/github/repo-size/yassine-rd/fish-detector?color=red&label=repository%20size)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/yassine-rd/fish-detector?color=red)
-![GitHub language count](https://img.shields.io/github/languages/count/yassine-rd/fish-detector)
-![GitHub top language](https://img.shields.io/github/languages/top/yassine-rd/fish-detector)
-![GitHub](https://img.shields.io/github/license/yassine-rd/fish-detector?color=yellow)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/yassine-rd/fish-detector?color=brightgreen&label=commits)
-
-This repository implements YOLOv4 using the Darknet framework for tracking and counting of 2 different fish species in an aquarium.
+This repository implements YOLOv4 using TensorFlow for tracking and counting of two different fish species within an aquarium.
 
 ## ✨ Abstract
 
@@ -29,7 +22,7 @@ The following three members of the genus Paracheirodon are readily found in mark
 
 ## 🎯 Project Aim
 
-In this work, we propose to create a custom YOLOv4 object detector to track and count the two first classes.
+In collaboration with [Maison Haegel](https://maison-haegel.fr/), this project focuses on building a computer vision system to count and track two distinct fish species within an aquarium.
 
 1. Paracheirodon innesi, alias `neon_bleu`
 2. Paracheirodon axelrodi, alias `cardinalis`
@@ -48,7 +41,7 @@ Initial release date - 01/12/2022
 
 ## 🤖 Model training
 
-The training part of this project has been done separately using Jupyter notebook.
+The training part of this project has been done separately using the [Darknet](https://pjreddie.com/darknet/) framework.
 
 > TODO: jupyter notebook for model training
 
@@ -176,7 +169,7 @@ Custom count functions are within the file [core/functions.py](https://github.co
 
 ##### Count total bbjects
 
-To count total objects all that is needed is to add the custom flag `--count` to your `detect.py` or `detect_video.py` command.
+To count total objects, add the custom flag `--count` to your `detect.py` or `detect_video.py` command.
 
 ```python
 # Running the model while counting total objects detected
@@ -328,19 +321,30 @@ detect_video.py:
 
 ## 💬 Contact
 
-Reach out to [@yassine_rd_](https://twitter.com/yassine_rd_) on Twitter or feel free to contact yassine.rodani@gmail.com
+Reach out to [@yassine_rd_](https://twitter.com/yassine_rd_) on Twitter or feel free to contact <yassine.rodani@gmail.com>
 
 ## 🔑 Licence
 
 This project is licensed under the MIT License.
 
-MIT ©Yassine RODANI.
-
 See the [LICENSE](https://github.com/yassine-rd/fish-detector/blob/master/LICENSE) file for more details.
 
 ## 🌐 References
 
-- [The AI Guy](https://github.com/theAIGuysCode)
-- [AlexeyAB](https://github.com/AlexeyAB/darknet)
-- [YOLOv4 Paper](https://arxiv.org/abs/2004.10934v1)
-- [hunglc007](https://github.com/hunglc007?tab=repositories)
+```text
+@misc{bochkovskiy2020yolov4,
+      title={YOLOv4: Optimal Speed and Accuracy of Object Detection}, 
+      author={Alexey Bochkovskiy and Chien-Yao Wang and Hong-Yuan Mark Liao},
+      year={2020},
+      eprint={2004.10934},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+
+@misc{darknet13,
+  author={Joseph Redmon},
+  title={Darknet: Open Source Neural Networks in C},
+  howpublished={\url{http://pjreddie.com/darknet/}},
+  year={2013--2016}
+}
+```
